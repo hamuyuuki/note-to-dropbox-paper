@@ -8,6 +8,7 @@
         "outDir": "dist/js",
         "noEmitOnError": true,
         "typeRoots": [ "node_modules/@types" ],
-        "jsx": "react"
+        "jsx": "react",
+        "esModuleInterop": true
     }
 }
