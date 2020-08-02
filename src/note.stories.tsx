@@ -1,11 +1,11 @@
 import React from "react";
-import App from './note';
+import Editor from 'rich-markdown-editor';
 
 export default {
   title: 'Note'
 };
 
-export const ToStorybook = () => <App />;
+export const ToStorybook = () => <Editor/>;
 
 ToStorybook.story = {
   name: 'default',
