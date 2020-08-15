@@ -37,7 +37,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "jest": "^25.1.0",
     "react-docgen-typescript-loader": "^3.7.2",
-    "rich-markdown-editor": "^10.5.0-0",
+    "rich-markdown-editor": "^10.6.1",
     "rimraf": "^3.0.2 ",
     "storybook": "^5.3.19",
     "ts-jest": "^25.2.1 ",

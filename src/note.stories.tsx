@@ -5,7 +5,7 @@ export default {
   title: 'Note'
 };
 
-export const ToStorybook = () => <Editor/>;
+export const ToStorybook = () => <Editor onChange={this.onChange} />;
 
 ToStorybook.story = {
   name: 'default',
