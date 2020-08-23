@@ -1,11 +1,11 @@
 import React from "react";
-import Editor from 'rich-markdown-editor';
+import App from './note';
 
 export default {
   title: 'Note'
 };
 
-export const ToStorybook = () => <Editor onChange={this.onChange} />;
+export const ToStorybook  = () => <App />;
 
 ToStorybook.story = {
   name: 'default',
