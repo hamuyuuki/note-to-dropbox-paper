@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import Editor from 'rich-markdown-editor';
-import { Grid, Select, Button, Container } from 'semantic-ui-react'
+import { Grid, Dropdown, Button, Container, Divider, Input } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 const countryOptions = [
@@ -36,11 +36,17 @@ export default class App extends Component{
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column textAlign='center'>
-              <Select placeholder='Select your country' options={countryOptions} />
+              <Dropdown placeholder='Select folder' scrolling options={countryOptions} />
             </Grid.Column>
             <Grid.Column textAlign='center'>
               <Button primary>Submit</Button>
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Divider />
+          </Grid.Row>
+          <Grid.Row textAlign='justified'>
+            <Input transparent placeholder='Title' />
           </Grid.Row>
           <Grid.Row textAlign='justified'>
             <Grid.Column>
