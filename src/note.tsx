@@ -4,29 +4,9 @@ import { Grid, Dropdown, Button, Container, Divider, Input } from 'semantic-ui-r
 import 'semantic-ui-css/semantic.min.css'
 
 const countryOptions = [
-  { key: 'af', value: 'af', text: 'Afghanistan' },
-  { key: 'ax', value: 'ax', text: 'Aland Islands' },
-  { key: 'al', value: 'al', text: 'Albania' },
-  { key: 'dz', value: 'dz', text: 'Algeria' },
-  { key: 'as', value: 'as', text: 'American Samoa' },
-  { key: 'ad', value: 'ad', text: 'Andorra' },
-  { key: 'ao', value: 'ao', text: 'Angola' },
-  { key: 'ai', value: 'ai', text: 'Anguilla' },
-  { key: 'ag', value: 'ag', text: 'Antigua' },
-  { key: 'ar', value: 'ar', text: 'Argentina' },
-  { key: 'am', value: 'am', text: 'Armenia' },
-  { key: 'aw', value: 'aw', text: 'Aruba' },
-  { key: 'au', value: 'au', text: 'Australia' },
-  { key: 'at', value: 'at', text: 'Austria' },
-  { key: 'az', value: 'az', text: 'Azerbaijan' },
-  { key: 'bs', value: 'bs', text: 'Bahamas' },
-  { key: 'bh', value: 'bh', text: 'Bahrain' },
-  { key: 'bd', value: 'bd', text: 'Bangladesh' },
-  { key: 'bb', value: 'bb', text: 'Barbados' },
-  { key: 'by', value: 'by', text: 'Belarus' },
-  { key: 'be', value: 'be', text: 'Belgium' },
-  { key: 'bz', value: 'bz', text: 'Belize' },
-  { key: 'bj', value: 'bj', text: 'Benin' },
+  { key: 'a', value: 'a', text: '調べ物' },
+  { key: 'b', value: 'b', text: '自宅' },
+  { key: 'c', value: 'c', text: '会社' },
 ]
 
 export default class App extends Component{
@@ -35,22 +15,24 @@ export default class App extends Component{
       <Container>
         <Grid>
           <Grid.Row columns={2}>
-            <Grid.Column textAlign='center'>
-              <Dropdown placeholder='Select folder' scrolling options={countryOptions} />
+            <Grid.Column textAlign='left'>
+              <Dropdown placeholder='Select folder' search selection options={countryOptions} />
             </Grid.Column>
-            <Grid.Column textAlign='center'>
+            <Grid.Column textAlign='right'>
               <Button primary>Submit</Button>
             </Grid.Column>
           </Grid.Row>
+        </Grid>
+        <Divider/>
+        <Grid>
           <Grid.Row>
-            <Divider />
-          </Grid.Row>
-          <Grid.Row textAlign='justified'>
-            <Input transparent placeholder='Title' />
-          </Grid.Row>
-          <Grid.Row textAlign='justified'>
             <Grid.Column>
-              <Editor onChange={() => 1} />
+              <Input size='massive' transparent fluid placeholder='Title...' />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Editor placeholder='Body...' onChange={() => 1} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
