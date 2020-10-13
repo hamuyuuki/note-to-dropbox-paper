@@ -9,7 +9,21 @@ const countryOptions = [
   { key: 'c', value: 'c', text: '会社' },
 ]
 
-export default class App extends Component{
+interface Props {}
+interface State {
+  value: String,
+}
+
+export default class App extends Component<Props, State>{
+  constructor(props: Props) {
+    super(props);
+    this.state = { value: "Title" };
+  }
+
+  onChange = (value) => {
+    this.setState({value: value()});
+  }
+
   render(){
     return(
       <Container>
@@ -27,12 +41,12 @@ export default class App extends Component{
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Input size='massive' transparent fluid placeholder='Title...' />
+              <Input size='massive' transparent fluid placeholder='Title...' value={this.state.value} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Editor placeholder='Body...' onChange={() => 1} />
+              <Editor placeholder='Body...' onChange={this.onChange} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
