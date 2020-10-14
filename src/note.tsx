@@ -2,6 +2,8 @@ import React, { Component} from "react";
 import Editor from 'rich-markdown-editor';
 import { Grid, Dropdown, Button, Container, Divider, Input } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
+import { Dropbox } from 'dropbox';
+import fetch from 'isomorphic-fetch';
 
 const countryOptions = [
   { key: 'a', value: 'a', text: '調べ物' },
@@ -22,6 +24,11 @@ export default class App extends Component<Props, State>{
 
   onChange = (value) => {
     this.setState({value: value()});
+  };
+
+  onClick = async (event, data) => {
+    const dropbox = new Dropbox({ fetch, accessToken: "" });
+    const response = await dropbox.paperDocsCreate({ contents: this.state.value, import_format: {".tag": "markdown"} });
   }
 
   render(){
@@ -33,7 +40,7 @@ export default class App extends Component<Props, State>{
               <Dropdown placeholder='Select folder' search selection options={countryOptions} />
             </Grid.Column>
             <Grid.Column textAlign='right'>
-              <Button primary>Submit</Button>
+              <Button primary onClick={this.onClick}>Submit</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
