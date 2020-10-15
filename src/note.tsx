@@ -13,17 +13,22 @@ const folderOptions = [
 
 interface Props {}
 interface State {
-  value: String,
+  titleValue: string,
+  bodyValue: string,
 }
 
 export default class App extends Component<Props, State>{
   constructor(props: Props) {
     super(props);
-    this.state = { value: "Title" };
+    this.state = { titleValue: "", bodyValue: "" };
   }
 
-  onChange = (value) => {
-    this.setState({value: value()});
+  onChangeTitle = (event, data) => {
+    this.setState({ titleValue: data.value });
+  }
+
+  onChangeBody = (value) => {
+    this.setState({ bodyValue: value() });
   };
 
   onClick = async (event, data) => {
@@ -48,12 +53,12 @@ export default class App extends Component<Props, State>{
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Input size='massive' transparent fluid placeholder='Title...' value={this.state.value} />
+              <Input defaultValue={this.state.titleValue} size='massive' transparent fluid placeholder='Title...' onChange={this.onChangeTitle} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Editor placeholder='Body...' onChange={this.onChange} />
+              <Editor defaultValue={this.state.bodyValue} placeholder='Body...' onChange={this.onChangeBody} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
