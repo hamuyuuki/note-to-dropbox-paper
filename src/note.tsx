@@ -33,7 +33,9 @@ export default class App extends Component<Props, State>{
 
   onClick = async (event, data) => {
     const dropbox = new Dropbox({ fetch, accessToken: "" });
-    const response = await dropbox.paperDocsCreate({ contents: this.state.value, import_format: {".tag": "markdown"} });
+    const content = this.state.titleValue + '\n\n' + this.state.bodyValue.replace(/\\/g, "");
+    const response = await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
+    alert("Dropbox Paperへ登録が成功しました！");
   }
 
   render(){
