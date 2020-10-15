@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Dropbox } from 'dropbox';
 import fetch from 'isomorphic-fetch';
 
-const countryOptions = [
+const folderOptions = [
   { key: 'a', value: 'a', text: '調べ物' },
   { key: 'b', value: 'b', text: '自宅' },
   { key: 'c', value: 'c', text: '会社' },
@@ -37,7 +37,7 @@ export default class App extends Component<Props, State>{
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column textAlign='left'>
-              <Dropdown placeholder='Select folder' search selection options={countryOptions} />
+              <Dropdown placeholder='Select folder' search selection options={folderOptions} />
             </Grid.Column>
             <Grid.Column textAlign='right'>
               <Button primary onClick={this.onClick}>Submit</Button>
