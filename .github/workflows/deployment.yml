@@ -50,7 +50,7 @@ jobs:
         node-version: '12'
     - run: yarn install
     - run: yarn build
-    - run: zip -r note-to-dropbox-paper.zip dist
+    - run: yarn run pack
     - uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
