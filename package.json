@@ -24,7 +24,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.2.1"
+    "semantic-ui-react": "^1.2.1",
+    "webextension-polyfill-ts": "^0.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
