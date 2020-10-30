@@ -33,8 +33,7 @@ export default class App extends Component<Props, State>{
   };
 
   onClick = async (event, data) => {
-    const background = await browser.runtime.getBackgroundPage();
-    // @ts-ignore
+    const background: any = await browser.runtime.getBackgroundPage();
     const accessToken = await background.getAccessToken();
 
     const dropbox = new Dropbox({ fetch, accessToken: accessToken });
