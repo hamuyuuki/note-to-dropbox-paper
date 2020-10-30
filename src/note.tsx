@@ -33,14 +33,11 @@ export default class App extends Component<Props, State>{
   };
 
   onClick = async (event, data) => {
-    const redirectUrl = browser.identity.getRedirectURL("oauth2/callback");
-    const client_id = "";
-    const authorization_url = `https://www.dropbox.com/oauth2/authorize?client_id=${client_id}&redirect_uri=${redirectUrl}&response_type=token`;
+    const background = await browser.runtime.getBackgroundPage();
+    // @ts-ignore
+    const accessToken = await background.getAccessToken();
 
-    const redirect_url = await browser.identity.launchWebAuthFlow({ 'url': authorization_url, 'interactive': true });
-    const fragments = new URLSearchParams(new URL(redirect_url).hash.substr(1));
-
-    const dropbox = new Dropbox({ fetch, accessToken: fragments.get("access_token") });
+    const dropbox = new Dropbox({ fetch, accessToken: accessToken });
     const content = this.state.titleValue + '\n\n' + this.state.bodyValue.replace(/\\/g, "");
     const response = await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
     alert("Dropbox Paperへ登録が成功しました！");
