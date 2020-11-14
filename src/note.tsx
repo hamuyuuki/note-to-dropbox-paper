@@ -6,22 +6,27 @@ import { Dropbox } from 'dropbox';
 import fetch from 'isomorphic-fetch';
 import { browser } from 'webextension-polyfill-ts';
 
-const folderOptions = [
-  { key: 'a', value: 'a', text: '調べ物' },
-  { key: 'b', value: 'b', text: '自宅' },
-  { key: 'c', value: 'c', text: '会社' },
-]
-
 interface Props {}
 interface State {
   titleValue: string,
   bodyValue: string,
+  folderOptions: Array<{key: string, value: string, text: string}>
 }
 
 export default class App extends Component<Props, State>{
   constructor(props: Props) {
     super(props);
-    this.state = { titleValue: "", bodyValue: "" };
+    this.state = { titleValue: "", bodyValue: "", folderOptions: [] };
+  }
+
+  componentDidMount() {
+    this.setState({
+      folderOptions: [
+        { key: 'a', value: 'a', text: '調べ物' },
+        { key: 'b', value: 'b', text: '自宅' },
+        { key: 'c', value: 'c', text: '会社' },
+      ]
+    });
   }
 
   onChangeTitle = (event, data) => {
@@ -48,7 +53,7 @@ export default class App extends Component<Props, State>{
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column textAlign='left'>
-              <Dropdown placeholder='Select folder' search selection options={folderOptions} />
+              <Dropdown placeholder='Select folder' search selection options={this.state.folderOptions} />
             </Grid.Column>
             <Grid.Column textAlign='right'>
               <Button primary onClick={this.onClick}>Submit</Button>
