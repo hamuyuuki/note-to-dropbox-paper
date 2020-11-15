@@ -1,15 +1,17 @@
 import { browser } from 'webextension-polyfill-ts';
+import { DropboxAuth } from 'dropbox';
 
-let accessToken;
+let dropboxAuth = new DropboxAuth({ clientId: "" });;
 
 (window as any).getAccessToken = async () => {
-  if (accessToken) return accessToken;
+  if (dropboxAuth.getAccessTokenExpiresAt() && Date.now() < dropboxAuth.getAccessTokenExpiresAt().getMilliseconds()) return dropboxAuth.getAccessToken();
 
-  const redirectUrl = browser.identity.getRedirectURL("oauth2/callback");
-  const client_id = "";
-  const authorization_url = `https://www.dropbox.com/oauth2/authorize?client_id=${client_id}&redirect_uri=${redirectUrl}&response_type=token`;
+  const authorization_url = dropboxAuth.getAuthenticationUrl(browser.identity.getRedirectURL("oauth2/callback"));
   const redirect_url = await browser.identity.launchWebAuthFlow({ 'url': authorization_url, 'interactive': true });
-  accessToken = new URLSearchParams(new URL(redirect_url).hash.substr(1)).get("access_token");
 
-  return accessToken;
+  dropboxAuth.setAccessToken(new URLSearchParams(new URL(redirect_url).hash.substr(1)).get("access_token"));
+  const expires_in = new URLSearchParams(new URL(redirect_url).hash.substr(1)).get("expires_in");
+  dropboxAuth.setAccessTokenExpiresAt(new Date(Date.now() + parseInt(expires_in) + 1000));
+
+  return dropboxAuth.getAccessToken();
 }
