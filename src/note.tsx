@@ -19,8 +19,10 @@ export default class App extends Component<Props, State>{
     this.state = { titleValue: "", bodyValue: "", folderOptions: [] };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({
+      titleValue: (await browser.tabs.query({ active: true }))[0].title,
+      // bodyValue: (await browser.tabs.query({ active: true }))[0].url,
       folderOptions: [
         { key: 'a', value: 'a', text: '調べ物' },
         { key: 'b', value: 'b', text: '自宅' },

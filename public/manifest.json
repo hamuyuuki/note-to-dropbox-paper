@@ -18,6 +18,7 @@
     "storage",
     "<all_urls>",
     "identity",
-    "https://www.dropbox.com/*"
+    "https://www.dropbox.com/*",
+    "tabs"
   ]
 }
