@@ -1,10 +1,11 @@
 import React, { Component} from "react";
 import Editor from 'rich-markdown-editor';
-import { Grid, Dropdown, Button, Container, Divider, Input } from 'semantic-ui-react'
+import { Grid, Dropdown, Button, Container, Divider, Input, Loader } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { Dropbox } from 'dropbox';
 import fetch from 'isomorphic-fetch';
 import { browser } from 'webextension-polyfill-ts';
+
 
 interface Props {}
 interface State {
@@ -71,7 +72,11 @@ export default class App extends Component<Props, State>{
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Editor defaultValue={this.state.bodyValue} placeholder='Body...' onChange={this.onChangeBody} />
+              {
+                this.state.bodyValue ?
+                  <Editor defaultValue={this.state.bodyValue} placeholder='Body...' onChange={this.onChangeBody} /> :
+                  <Loader active inline='centered' />
+              }
             </Grid.Column>
           </Grid.Row>
         </Grid>
