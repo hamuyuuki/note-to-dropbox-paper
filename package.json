@@ -1,7 +1,7 @@
 {
   "name": "note-to-dropbox-paper",
   "version": "0.0.1",
-  "description": "Note a web page to Dropbox Paper",
+  "description": "`note-to-dropbox-paper` notes a web page to Dropbox Paper in Google Chrome",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --config webpack/webpack.dev.js --watch",
