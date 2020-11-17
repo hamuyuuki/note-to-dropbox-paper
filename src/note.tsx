@@ -54,6 +54,7 @@ export default class App extends Component<Props, State>{
     const dropbox = new Dropbox({ fetch, accessToken: accessToken });
     const content = this.state.titleValue + '\n\n' + this.state.bodyValue.replace(/\\/g, "");
     const response = await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
+    this.setState({ submitted: true })
     browser.storage.local.set({ titleValue: "", bodyValue: "" });
   }
 
