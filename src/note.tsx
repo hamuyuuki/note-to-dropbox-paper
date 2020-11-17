@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import Editor from 'rich-markdown-editor';
-import { Grid, Dropdown, Button, Container, Divider, Input, Loader } from 'semantic-ui-react'
+import { Grid, Dropdown, Button, Container, Divider, Input, Loader, Message } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { Dropbox } from 'dropbox';
 import fetch from 'isomorphic-fetch';
@@ -11,13 +11,14 @@ interface Props {}
 interface State {
   titleValue: string,
   bodyValue: string,
-  folderOptions: Array<{key: string, value: string, text: string}>
+  folderOptions: Array<{key: string, value: string, text: string}>,
+  submitted: boolean
 }
 
 export default class App extends Component<Props, State>{
   constructor(props: Props) {
     super(props);
-    this.state = { titleValue: "", bodyValue: null, folderOptions: [] };
+    this.state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
   }
 
   async componentDidMount() {
@@ -31,6 +32,10 @@ export default class App extends Component<Props, State>{
       ]
     });
   }
+
+  handleDismiss = (event, data) => {
+    this.setState({ submitted: false })
+  };
 
   onChangeTitle = (event, data) => {
     this.setState({ titleValue: data.value });
@@ -55,6 +60,9 @@ export default class App extends Component<Props, State>{
   render(){
     return(
       <Container>
+        <Message positive hidden={!this.state.submitted} onDismiss={this.handleDismiss}>
+          <Message.Header>Dropbox Paperへ登録が成功しました！</Message.Header>
+        </Message>
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column textAlign='left'>
