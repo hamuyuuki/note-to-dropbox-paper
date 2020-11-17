@@ -17,13 +17,13 @@ interface State {
 export default class App extends Component<Props, State>{
   constructor(props: Props) {
     super(props);
-    this.state = { titleValue: "", bodyValue: "", folderOptions: [] };
+    this.state = { titleValue: "", bodyValue: null, folderOptions: [] };
   }
 
   async componentDidMount() {
     this.setState({
-      titleValue: (await browser.tabs.query({ active: true }))[0].title,
-      // bodyValue: (await browser.tabs.query({ active: true }))[0].url,
+      titleValue: (await browser.storage.local.get('titleValue')).titleValue,
+      bodyValue: (await browser.storage.local.get('bodyValue')).bodyValue,
       folderOptions: [
         { key: 'a', value: 'a', text: '調べ物' },
         { key: 'b', value: 'b', text: '自宅' },
@@ -34,10 +34,12 @@ export default class App extends Component<Props, State>{
 
   onChangeTitle = (event, data) => {
     this.setState({ titleValue: data.value });
+    browser.storage.local.set({ titleValue: data.value });
   }
 
   onChangeBody = (value) => {
     this.setState({ bodyValue: value() });
+    browser.storage.local.set({ bodyValue: value() });
   };
 
   onClick = async (event, data) => {
@@ -47,7 +49,7 @@ export default class App extends Component<Props, State>{
     const dropbox = new Dropbox({ fetch, accessToken: accessToken });
     const content = this.state.titleValue + '\n\n' + this.state.bodyValue.replace(/\\/g, "");
     const response = await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
-    alert("Dropbox Paperへ登録が成功しました！");
+    browser.storage.local.set({ titleValue: "", bodyValue: "" });
   }
 
   render(){
@@ -73,7 +75,7 @@ export default class App extends Component<Props, State>{
           <Grid.Row>
             <Grid.Column>
               {
-                this.state.bodyValue ?
+                this.state.bodyValue !== null ?
                   <Editor defaultValue={this.state.bodyValue} placeholder='Body...' onChange={this.onChangeBody} /> :
                   <Loader active inline='centered' />
               }
