@@ -1,5 +1,5 @@
-import { browser } from 'webextension-polyfill-ts';
 import { DropboxAuth } from 'dropbox';
+import { browser } from 'webextension-polyfill-ts';
 
 let dropboxAuth = new DropboxAuth({ clientId: "" });;
 

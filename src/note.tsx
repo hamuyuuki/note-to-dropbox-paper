@@ -1,11 +1,10 @@
-import React, { Component} from "react";
-import Editor from 'rich-markdown-editor';
-import { Grid, Dropdown, Button, Container, Divider, Input, Loader, Message } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
 import { Dropbox } from 'dropbox';
 import fetch from 'isomorphic-fetch';
+import React from "react";
+import Editor from 'rich-markdown-editor';
+import 'semantic-ui-css/semantic.min.css'
+import { Button, Container, Divider, Dropdown, Grid, Input, Loader, Message } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts';
-
 
 interface Props {}
 interface State {
@@ -15,7 +14,7 @@ interface State {
   submitted: boolean
 }
 
-export default class App extends Component<Props, State>{
+export default class App extends React.Component<Props, State>{
   constructor(props: Props) {
     super(props);
     this.state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
