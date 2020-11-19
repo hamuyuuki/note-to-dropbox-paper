@@ -10,7 +10,8 @@
     "clean": "rimraf dist",
     "test": "npx jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint": "eslint src/**/*"
   },
   "author": "hamuyuuki",
   "license": "MIT",
@@ -39,10 +40,13 @@
     "@types/jquery": "^3.3.33",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^4.3.0",
     "eslint": "^7.13.0",
+    "eslint-plugin-react": "^7.21.5",
     "jest": "^25.1.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "rich-markdown-editor": "^10.6.1",
