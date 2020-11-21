@@ -6,7 +6,6 @@ import 'semantic-ui-css/semantic.min.css'
 import { Button, Container, Divider, Dropdown, Grid, Input, Loader, Message } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts';
 
-interface Props {}
 interface State {
   titleValue: string,
   bodyValue: string,
@@ -14,11 +13,11 @@ interface State {
   submitted: boolean
 }
 
-export default class App extends React.Component<Props, State>{
   constructor(props: Props) {
     super(props);
     this.state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
   }
+export default class App extends React.Component<{}, State>{
 
   async componentDidMount() {
     this.setState({
