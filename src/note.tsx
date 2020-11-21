@@ -16,7 +16,7 @@ interface State {
 export default class App extends React.Component<{}, State>{
   state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
 
-  async componentDidMount() {
+  async componentDidMount(): Promise<void> {
     this.setState({
       titleValue: (await browser.storage.local.get('titleValue')).titleValue,
       bodyValue: (await browser.storage.local.get('bodyValue')).bodyValue,
