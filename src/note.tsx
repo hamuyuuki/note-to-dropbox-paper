@@ -13,11 +13,8 @@ interface State {
   submitted: boolean
 }
 
-  constructor(props: Props) {
-    super(props);
-    this.state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
-  }
 export default class App extends React.Component<{}, State>{
+  state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
 
   async componentDidMount() {
     this.setState({
