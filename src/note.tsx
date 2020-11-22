@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Button, Container, Divider, Dropdown, Grid, Input, Loader, Message } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts';
 
-interface State {
+type State = {
   titleValue: string,
   bodyValue: string,
   folderOptions: Array<{key: string, value: string, text: string}>,
