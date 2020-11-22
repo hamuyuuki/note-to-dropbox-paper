@@ -1,7 +1,7 @@
 import { DropboxAuth } from 'dropbox';
 import { browser } from 'webextension-polyfill-ts';
 
-let dropboxAuth = new DropboxAuth({ clientId: "" });;
+const dropboxAuth = new DropboxAuth({ clientId: "" });
 
 (window as any).getAccessToken = async () => {
   if (dropboxAuth.getAccessTokenExpiresAt() && Date.now() < dropboxAuth.getAccessTokenExpiresAt().getMilliseconds()) return dropboxAuth.getAccessToken();

@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import React from "react";
 import Editor from 'rich-markdown-editor';
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Container, Divider, Dropdown, Grid, Input, Loader, Message } from 'semantic-ui-react'
+import { Button, Container, Divider, Dropdown, Grid, Input, InputOnChangeData, Loader, Message } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts';
 
 type State = {
@@ -28,32 +28,32 @@ export default class App extends React.Component<{}, State>{
     });
   }
 
-  handleDismiss = (event, data) => {
+  handleDismiss = (): void => {
     this.setState({ submitted: false })
   };
 
-  onChangeTitle = (event, data) => {
+  onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData): void => {
     this.setState({ titleValue: data.value });
     browser.storage.local.set({ titleValue: data.value });
   }
 
-  onChangeBody = (value) => {
+  onChangeBody = (value: () => string): void => {
     this.setState({ bodyValue: value() });
     browser.storage.local.set({ bodyValue: value() });
   };
 
-  onClick = async (event, data) => {
-    const background: any = await browser.runtime.getBackgroundPage();
+  onClick = async (): Promise<void> => {
+    const background = (await browser.runtime.getBackgroundPage() as any);
     const accessToken = await background.getAccessToken();
 
     const dropbox = new Dropbox({ fetch, accessToken: accessToken });
     const content = this.state.titleValue + '\n\n' + this.state.bodyValue.replace(/\\/g, "");
-    const response = await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
+    await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
     this.setState({ submitted: true })
     browser.storage.local.set({ titleValue: "", bodyValue: "" });
   }
 
-  render(){
+  render(): JSX.Element {
     return(
       <Container>
         <Message positive hidden={!this.state.submitted} onDismiss={this.handleDismiss}>

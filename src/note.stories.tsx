@@ -5,7 +5,7 @@ export default {
   title: 'Note'
 };
 
-export const ToStorybook  = () => <App />;
+export const ToStorybook  = (): JSX.Element => <App />;
 
 ToStorybook.story = {
   name: 'default',
