@@ -32,14 +32,8 @@ module.exports = {
             "../src/__mocks__/webextension-polyfill-ts.ts",
           );
 
-          // Gets relative path from requesting module to our mocked module
-          const relativePath = path.relative(
-            resource.context,
-            absRootMockPath,
-          );
-
           // Updates the `resource.request` to reference our mocked module instead of the real one
-          resource.request = relativePath;
+          resource.request = absRootMockPath;
         },
       ),
     ];
