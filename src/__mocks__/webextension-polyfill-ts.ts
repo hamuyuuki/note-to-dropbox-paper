@@ -21,5 +21,14 @@ export const browser: any = {
         })
       }
     }
+  },
+  runtime: {
+    getBackgroundPage(): { getAccessToken(): string } {
+      return {
+        getAccessToken(): string {
+          return "access token"
+        }
+      }
+    }
   }
 };
