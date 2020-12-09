@@ -3,18 +3,19 @@ import fetch from 'isomorphic-fetch';
 import React from "react";
 import Editor from 'rich-markdown-editor';
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Container, Divider, Dropdown, Grid, Input, InputOnChangeData, Loader, Message } from 'semantic-ui-react'
+import { Button, Container, Divider, Dropdown, Grid, Input, InputOnChangeData, Loader, Message, PlaceholderParagraph } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts';
 
 type State = {
   titleValue: string,
   bodyValue: string,
   folderOptions: Array<{key: string, value: string, text: string}>,
-  submitted: boolean
+  successfulSubmission: boolean,
+  failedSubmission: boolean
 }
 
 export default class App extends React.Component<{}, State>{
-  state = { titleValue: "", bodyValue: null, folderOptions: [], submitted: false };
+  state = { titleValue: "", bodyValue: null, folderOptions: [], successfulSubmission: false, failedSubmission: false};
 
   async componentDidMount(): Promise<void> {
     this.setState({
@@ -29,7 +30,7 @@ export default class App extends React.Component<{}, State>{
   }
 
   handleDismiss = (): void => {
-    this.setState({ submitted: false })
+    this.setState({ successfulSubmission: false, failedSubmission: false })
   };
 
   onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData): void => {
@@ -46,18 +47,27 @@ export default class App extends React.Component<{}, State>{
     const background = (await browser.runtime.getBackgroundPage() as any);
     const accessToken = await background.getAccessToken();
 
-    const dropbox = new Dropbox({ fetch, accessToken: accessToken });
     const content = this.state.titleValue + '\n\n' + this.state.bodyValue.replace(/\\/g, "");
-    await dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" });
-    this.setState({ submitted: true })
+
+    try {
+      const dropbox = new Dropbox({ fetch, accessToken: accessToken });
+      dropbox.paperDocsCreate({ contents: content, import_format: {".tag": "markdown"}, parent_folder_id: "" })
+    } catch (e) {
+      this.setState({ failedSubmission: true })
+    }
+
+    this.setState({ successfulSubmission: true })
     browser.storage.local.set({ titleValue: "", bodyValue: "" });
   }
 
   render(): JSX.Element {
     return(
       <Container>
-        <Message positive hidden={!this.state.submitted} onDismiss={this.handleDismiss}>
-          <Message.Header>Dropbox Paperへ登録が成功しました！</Message.Header>
+        <Message positive hidden={!this.state.successfulSubmission} onDismiss={this.handleDismiss}>
+          <Message.Header>Dropbox Paperへ登録が成功しました</Message.Header>
+        </Message>
+        <Message negative hidden={!this.state.failedSubmission} onDismiss={this.handleDismiss}>
+          <Message.Header>Dropbox Paperへ登録が失敗しました</Message.Header>
         </Message>
         <Grid>
           <Grid.Row columns={2}>
