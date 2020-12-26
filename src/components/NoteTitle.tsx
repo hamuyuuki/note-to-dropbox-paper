@@ -12,7 +12,6 @@ export default function NoteTitle(
 ): JSX.Element {
   return <Input
     defaultValue={props.defaultTitle}
-    fluid
     onChange={props.onChange}
     placeholder='Title...'
     size='massive'
