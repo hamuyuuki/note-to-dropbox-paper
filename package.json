@@ -11,7 +11,9 @@
     "test": "npx jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "lint": "eslint src/**/*"
+    "lint": "yarn lint:prettier && yarn lint:eslint",
+    "lint:prettier": "prettier --check .",
+    "lint:eslint": "eslint ."
   },
   "author": "hamuyuuki",
   "license": "MIT",
