@@ -1,3 +1,0 @@
-linter:
-  eslint:
-    target: src/**/*
