@@ -1,12 +1,12 @@
-import React from "react";
-import App from './note';
+import React from 'react'
+import App from './note'
 
 export default {
-  title: 'Note'
-};
+  title: 'Note',
+}
 
-export const ToStorybook  = (): JSX.Element => <App />;
+export const ToStorybook = (): JSX.Element => <App />
 
 ToStorybook.story = {
   name: 'default',
-};
+}
