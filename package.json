@@ -58,6 +58,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack/webpack.prod.ts",
+    "build-storybook": "build-storybook",
     "clean": "rimraf dist",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:eslint": "eslint .",
