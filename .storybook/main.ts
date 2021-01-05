@@ -1,10 +1,10 @@
-const webpack = require("webpack");
-const path = require("path");
+import * as path from 'path'
+import * as webpack from 'webpack'
 
-module.exports = {
-  stories: ['../src/**/*.stories.tsx'],
+const config = {
   addons: ['@storybook/addon-actions', '@storybook/addon-links'],
-  webpackFinal: async config => {
+  stories: ['../src/**/*.stories.tsx'],
+  webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [
@@ -16,8 +16,8 @@ module.exports = {
           loader: require.resolve('react-docgen-typescript-loader'),
         },
       ],
-    });
-    config.resolve.extensions.push('.ts', '.tsx');
+    })
+    config.resolve.extensions.push('.ts', '.tsx')
 
     config.plugins = [
       ...config.plugins,
@@ -29,15 +29,17 @@ module.exports = {
           // package can't be used outside the environment provided by web extensions
           const absRootMockPath = path.resolve(
             __dirname,
-            "../src/__mocks__/webextension-polyfill-ts.ts",
-          );
+            '../src/__mocks__/webextension-polyfill-ts.ts'
+          )
 
           // Updates the `resource.request` to reference our mocked module instead of the real one
-          resource.request = absRootMockPath;
-        },
+          resource.request = absRootMockPath
+        }
       ),
-    ];
+    ]
 
-    return config;
+    return config
   },
-};
+}
+
+export default config
