@@ -15,6 +15,7 @@ import {
   Message,
 } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts'
+import NoteTitle from './components/NoteTitle'
 
 type State = {
   titleValue: string
@@ -124,12 +125,8 @@ export default class App extends React.Component<{}, State> {
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Input
-                defaultValue={this.state.titleValue}
-                size="massive"
-                transparent
-                fluid
-                placeholder="Title..."
+              <NoteTitle
+                defaultTitle={this.state.titleValue}
                 onChange={this.onChangeTitle}
               />
             </Grid.Column>
