@@ -12,7 +12,7 @@ export default function NoteEditor(props: {
     <Editor
       defaultValue={props.defaultValue}
       placeholder="Body..."
-      onChange={this.onChange}
+      onChange={props.onChange}
     />
   )
 }
