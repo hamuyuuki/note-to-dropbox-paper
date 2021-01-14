@@ -1,7 +1,6 @@
 import { Dropbox } from 'dropbox'
 import fetch from 'isomorphic-fetch'
 import React from 'react'
-import Editor from 'rich-markdown-editor'
 import 'semantic-ui-css/semantic.min.css'
 import {
   Button,
@@ -9,12 +8,11 @@ import {
   Divider,
   Dropdown,
   Grid,
-  Input,
   InputOnChangeData,
-  Loader,
   Message,
 } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts'
+import NoteEditor from './components/NoteEditor'
 import NoteTitle from './components/NoteTitle'
 
 type State = {
@@ -133,15 +131,10 @@ export default class App extends React.Component<{}, State> {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              {this.state.bodyValue !== null ? (
-                <Editor
-                  defaultValue={this.state.bodyValue}
-                  placeholder="Body..."
-                  onChange={this.onChangeBody}
-                />
-              ) : (
-                <Loader active inline="centered" />
-              )}
+              <NoteEditor
+                defaultValue={this.state.bodyValue}
+                onChange={this.onChangeBody}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>
