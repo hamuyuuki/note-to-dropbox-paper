@@ -2,8 +2,8 @@ import React from 'react'
 import { Message, MessageProps } from 'semantic-ui-react'
 
 export default function NoteMessage(props: {
-  success: boolean
-  error: boolean
+  success?: boolean
+  error?: boolean
   onDismiss?: (event: React.MouseEvent<HTMLElement>, data: MessageProps) => void
 }): JSX.Element {
   if (!props.success && !props.error) return <></>
