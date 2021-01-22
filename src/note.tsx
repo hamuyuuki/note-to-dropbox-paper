@@ -9,10 +9,10 @@ import {
   Dropdown,
   Grid,
   InputOnChangeData,
-  Message,
 } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts'
 import NoteEditor from './components/NoteEditor'
+import NoteMessage from './components/NoteMessage'
 import NoteTitle from './components/NoteTitle'
 
 type State = {
@@ -88,20 +88,11 @@ export default class App extends React.Component<{}, State> {
   render(): JSX.Element {
     return (
       <Container>
-        <Message
-          positive
-          hidden={!this.state.successfulSubmission}
+        <NoteMessage
+          success={this.state.successfulSubmission}
+          error={this.state.failedSubmission}
           onDismiss={this.handleDismiss}
-        >
-          <Message.Header>Dropbox Paperへ登録が成功しました</Message.Header>
-        </Message>
-        <Message
-          negative
-          hidden={!this.state.failedSubmission}
-          onDismiss={this.handleDismiss}
-        >
-          <Message.Header>Dropbox Paperへ登録が失敗しました</Message.Header>
-        </Message>
+        ></NoteMessage>
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column textAlign="left">
