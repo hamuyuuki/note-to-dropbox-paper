@@ -6,12 +6,12 @@ import {
   Button,
   Container,
   Divider,
-  Dropdown,
   Grid,
   InputOnChangeData,
 } from 'semantic-ui-react'
 import { browser } from 'webextension-polyfill-ts'
 import NoteEditor from './components/NoteEditor'
+import NoteFolder from './components/NoteFolder'
 import NoteMessage from './components/NoteMessage'
 import NoteTitle from './components/NoteTitle'
 
@@ -96,12 +96,7 @@ export default class App extends React.Component<{}, State> {
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column textAlign="left">
-              <Dropdown
-                placeholder="Select folder"
-                search
-                selection
-                options={this.state.folderOptions}
-              />
+              <NoteFolder options={this.state.folderOptions} />
             </Grid.Column>
             <Grid.Column textAlign="right">
               <Button primary onClick={this.onClick}>
